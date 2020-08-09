@@ -6,9 +6,11 @@ class ItemModel {
   final String company;
   final String rate;
   final String id;
+  final String partNo;
 
   ItemModel({
     this.name,
+    this.partNo,
     this.tag,
     this.company,
     this.rate,
@@ -20,6 +22,7 @@ class ItemModel {
     String tag,
     String company,
     String rate,
+    String partNo,
     String id,
   }) {
     return ItemModel(
@@ -28,6 +31,7 @@ class ItemModel {
       company: company ?? this.company,
       rate: rate ?? this.rate,
       id: id ?? this.id,
+      partNo: partNo ?? this.partNo,
     );
   }
 
@@ -40,11 +44,12 @@ class ItemModel {
       name: documentData['name'],
       tag: documentData['tag'],
       rate: documentData['rate'],
+      partNo: documentData['part no'],
     );
   }
   @override
   String toString() {
-    return 'ItemModel(name: $name, tag: $tag, company: $company, rate: $rate, id: $id)';
+    return 'ItemModel(name: $name, tag: $tag, company: $company, rate: $rate, id: $id,partNo: $partNo)';
   }
 
   Map<String, String> toMap() {
@@ -53,6 +58,7 @@ class ItemModel {
       'tag': tag,
       'company': company,
       'rate': rate,
+      'part no': partNo,
     };
   }
 }

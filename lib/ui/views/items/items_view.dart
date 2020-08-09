@@ -47,20 +47,24 @@ class ItemsView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 4),
         width: MediaQuery.of(context).size.width,
         child: DataTable(
-          columnSpacing: 8,
+          columnSpacing: 0,
           sortColumnIndex: 1,
           showCheckboxColumn: false,
-          horizontalMargin: 16,
+          horizontalMargin: 8,
           columns: model
               .getColumns()
               .map(
                 (String item) => DataColumn(
-                  label: Text(
-                    item.toUpperCase(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      color: Colors.black,
+                  label: Expanded(
+                    child: Center(
+                      child: Text(
+                        item.toUpperCase(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -77,23 +81,33 @@ class ItemsView extends StatelessWidget {
                       }
                     : null,
                 cells: [
-                  DataCell(Text((index + 1).toString())),
+                  DataCell(
+                    Center(
+                      child: Text(
+                        (index + 1).toString(),
+                      ),
+                    ),
+                  ),
                   ...item.toMap().values.map(
                         (e) => DataCell(
-                          Text(
-                            e,
-                            style: const TextStyle(
-                              fontSize: 12,
+                          Center(
+                            child: Text(
+                              e,
+                              style: const TextStyle(
+                                fontSize: 12,
+                              ),
+                              overflow: TextOverflow.clip,
                             ),
-                            overflow: TextOverflow.clip,
                           ),
                         ),
                       ),
                   if (model.isLoggedIn)
                     const DataCell(
-                      Icon(
-                        Icons.edit,
-                        color: Colors.blue,
+                      Center(
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.blue,
+                        ),
                       ),
                     )
                 ].toList(),

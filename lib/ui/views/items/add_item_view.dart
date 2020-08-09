@@ -45,10 +45,12 @@ class _AddItemForm extends HookViewModelWidget<ItemViewModel> {
     final companyNode = useFocusNode();
     final rateNode = useFocusNode();
     final tagNode = useFocusNode();
+    final partNode = useFocusNode();
     final nameController = useTextEditingController();
     final companyController = useTextEditingController();
     final rateController = useTextEditingController();
     final tagController = useTextEditingController();
+    final partController = useTextEditingController();
     return Form(
       key: _formKey,
       child: Padding(
@@ -129,12 +131,33 @@ class _AddItemForm extends HookViewModelWidget<ItemViewModel> {
                 return null;
               },
               onEditingComplete: () {
-                FocusScope.of(context).requestFocus(FocusNode());
+                FocusScope.of(context).requestFocus(partNode);
               },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Tag",
                 labelText: "Tag",
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            TextFormField(
+              focusNode: partNode,
+              controller: partController,
+              validator: (val) {
+                if (val.isEmpty) {
+                  return "Empty part no provided";
+                }
+                return null;
+              },
+              onEditingComplete: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Part No",
+                labelText: "Part No",
               ),
             ),
             const SizedBox(
@@ -151,6 +174,7 @@ class _AddItemForm extends HookViewModelWidget<ItemViewModel> {
                     company: companyController.text,
                     tag: tagController.text,
                     rate: rateController.text,
+                    partNo: partController.text,
                   )
                       .then(
                     (value) {

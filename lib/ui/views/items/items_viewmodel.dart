@@ -70,31 +70,21 @@ class ItemViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.profileView);
   }
 
-  Future<bool> addItem({
-    @required String name,
-    @required String company,
-    @required String rate,
-    @required String tag,
-  }) async {
+  Future<bool> addItem(
+      {@required String name,
+      @required String company,
+      @required String rate,
+      @required String tag,
+      @required String partNo}) async {
     setBusy(true);
     try {
-      if (_items.where((element) => element.name == name).isNotEmpty) {
-        _snackbarService.showCustomSnackBar(
-          variant: SnackbarType.error,
-          title: "Error",
-          message: "Item already exists!",
-          duration: const Duration(seconds: 2),
-        );
-        setBusy(false);
-        return false;
-      }
-
       await _firestoreService.addItem(
         model: ItemModel(
           company: company,
           rate: rate,
           tag: tag,
           name: name,
+          partNo: partNo,
         ),
       );
       _snackbarService.showCustomSnackBar(
@@ -123,6 +113,7 @@ class ItemViewModel extends BaseViewModel {
     @required String rate,
     @required String tag,
     @required String id,
+    @required String partNo,
   }) async {
     setBusy(true);
     try {
@@ -133,6 +124,7 @@ class ItemViewModel extends BaseViewModel {
           rate: rate,
           tag: tag,
           name: name,
+          partNo: partNo,
         ),
       );
       _snackbarService.showCustomSnackBar(
