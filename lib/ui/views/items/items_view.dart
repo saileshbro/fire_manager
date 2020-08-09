@@ -71,9 +71,11 @@ class ItemsView extends StatelessWidget {
               final int index = entry.key;
               final ItemModel item = entry.value;
               return DataRow(
-                onSelectChanged: (_) {
-                  model.onEditPressed(item);
-                },
+                onSelectChanged: model.isLoggedIn
+                    ? (_) {
+                        model.onEditPressed(item);
+                      }
+                    : null,
                 cells: [
                   DataCell(Text((index + 1).toString())),
                   ...item.toMap().values.map(
