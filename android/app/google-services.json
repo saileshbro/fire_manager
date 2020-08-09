@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1080658129921",
+    "firebase_url": "https://saileshfiremanager.firebaseio.com",
+    "project_id": "saileshfiremanager",
+    "storage_bucket": "saileshfiremanager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080658129921:android:2dec52469f140162423c00",
+        "android_client_info": {
+          "package_name": "np.com.saileshdahal.fire_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080658129921-pt6lc95jucj97dvfgbb4nkqacmm0u3hm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "np.com.saileshdahal.fire_manager",
+            "certificate_hash": "8ba839564c310af5180a1c5fae494315df2fea6c"
+          }
+        },
+        {
+          "client_id": "1080658129921-oml74bcs9vd6er8cfek09km39jdtr2lc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxBOcm659S3RFNHV64TFwcDBlB8lovYEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080658129921-oml74bcs9vd6er8cfek09km39jdtr2lc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
