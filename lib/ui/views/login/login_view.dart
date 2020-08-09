@@ -1,4 +1,5 @@
 import 'package:fire_manager/app/locator.dart';
+import 'package:fire_manager/common/ui/busy_button.dart';
 import 'package:fire_manager/ui/views/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -40,6 +41,7 @@ class LoginView extends StatelessWidget {
           ),
         ),
       ),
+      disposeViewModel: false,
       viewModelBuilder: () => locator<LoginViewModel>(),
     );
   }
@@ -64,6 +66,9 @@ class _LoginForm extends HookViewModelWidget<LoginViewModel> {
               focusNode: emailNode,
               validator: model.validateEmail,
               onChanged: model.updateEmail,
+              // ignore: prefer_const_literals_to_create_immutables
+              autofillHints: [AutofillHints.email],
+              keyboardType: TextInputType.emailAddress,
               onEditingComplete: () {
                 FocusScope.of(context).requestFocus(passwordNode);
               },
@@ -81,6 +86,9 @@ class _LoginForm extends HookViewModelWidget<LoginViewModel> {
               focusNode: passwordNode,
               validator: model.validatePassword,
               onChanged: model.updatePassword,
+              // ignore: prefer_const_literals_to_create_immutables
+              autofillHints: [AutofillHints.password],
+              obscureText: true,
               onEditingComplete: () {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
@@ -93,17 +101,14 @@ class _LoginForm extends HookViewModelWidget<LoginViewModel> {
             const SizedBox(
               height: 24,
             ),
-            RaisedButton(
+            BusyButton(
+              busy: model.isBusy,
+              title: "Login",
               onPressed: () {
                 if (formKey.currentState.validate()) {
                   model.login();
                 }
               },
-              color: Colors.blue,
-              child: const Text(
-                "Login",
-                style: TextStyle(color: Colors.white),
-              ),
             )
           ],
         ),

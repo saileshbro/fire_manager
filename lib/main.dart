@@ -1,11 +1,13 @@
 import 'package:fire_manager/app/locator.dart';
 import 'package:fire_manager/app/router.gr.dart';
+import 'package:fire_manager/app/setup_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  setupSnackbar();
   runApp(MyApp());
 }
 

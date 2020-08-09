@@ -31,27 +31,6 @@ class ItemModel {
     );
   }
 
-  Map<String, String> toMap() {
-    return {
-      'name': name,
-      'tag': tag,
-      'company': company,
-      'rate': rate,
-      'id': id,
-    };
-  }
-
-  factory ItemModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return ItemModel(
-      name: map['name'],
-      tag: map['tag'],
-      company: map['company'],
-      rate: map['rate'],
-      id: map['id'],
-    );
-  }
   factory ItemModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     if (!snapshot.exists) return null;
     final Map<String, dynamic> documentData = snapshot.data;
@@ -68,7 +47,7 @@ class ItemModel {
     return 'ItemModel(name: $name, tag: $tag, company: $company, rate: $rate, id: $id)';
   }
 
-  Map<String, String> toVisibleMap() {
+  Map<String, String> toMap() {
     return {
       'name': name,
       'tag': tag,

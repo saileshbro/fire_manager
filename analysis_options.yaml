@@ -11,6 +11,7 @@ analyzer:
     unnecessary_getters_setters: ignore
     unnecessary_raw_strings: ignore
     prefer_constructors_over_static_methods: ignore
+    use_setters_to_change_properties: ignore
 linter:
   rules:
     parameter_assignments: true

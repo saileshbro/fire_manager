@@ -10,6 +10,15 @@ class ItemsView extends StatelessWidget {
     return ViewModelBuilder<ItemViewModel>.reactive(
       builder: (BuildContext context, ItemViewModel model, Widget child) =>
           Scaffold(
+        floatingActionButton: model.isLoggedIn
+            ? FloatingActionButton(
+                onPressed: model.onAddPressed,
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              )
+            : null,
         appBar: AppBar(
           title: const Text("Items"),
           actions: [
@@ -21,6 +30,7 @@ class ItemsView extends StatelessWidget {
         ),
         body: _getBody(model, context),
       ),
+      disposeViewModel: false,
       viewModelBuilder: () => locator<ItemViewModel>(),
     );
   }
@@ -62,11 +72,11 @@ class ItemsView extends StatelessWidget {
               final ItemModel item = entry.value;
               return DataRow(
                 onSelectChanged: (_) {
-                  print(item.id);
+                  model.onEditPressed(item);
                 },
                 cells: [
                   DataCell(Text((index + 1).toString())),
-                  ...item.toVisibleMap().values.map(
+                  ...item.toMap().values.map(
                         (e) => DataCell(
                           Text(
                             e,
@@ -76,7 +86,14 @@ class ItemsView extends StatelessWidget {
                             overflow: TextOverflow.clip,
                           ),
                         ),
-                      )
+                      ),
+                  if (model.isLoggedIn)
+                    const DataCell(
+                      Icon(
+                        Icons.edit,
+                        color: Colors.blue,
+                      ),
+                    )
                 ].toList(),
                 key: Key(item.id),
               );

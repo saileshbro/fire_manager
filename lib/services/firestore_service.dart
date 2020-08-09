@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fire_manager/datamodels/item_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class FirestoreService {
-  final CollectionReference _usersCollectionReference =
-      Firestore.instance.collection("users");
   final CollectionReference _itemsCollectionReference =
       Firestore.instance.collection("items");
   final StreamController<List<ItemModel>> _itemsController =
@@ -30,5 +29,22 @@ class FirestoreService {
       }
     }
     return items;
+  }
+
+  Future addItem({
+    @required ItemModel model,
+  }) async {
+    await _itemsCollectionReference.add(model.toMap());
+    return;
+  }
+
+  Future deleteItem(String id) async {
+    final DocumentReference reference = _itemsCollectionReference.document(id);
+    await reference.delete();
+  }
+
+  Future editItem({@required String id, @required ItemModel model}) async {
+    final DocumentReference reference = _itemsCollectionReference.document(id);
+    await reference.updateData(model.toMap());
   }
 }
