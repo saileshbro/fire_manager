@@ -47,7 +47,16 @@ class ItemViewModel extends BaseViewModel {
   void onFloatingActionButtonPressed() {}
 
   List<String> getColumns() {
-    final list = ["#", ...items[0].toMap().keys.toList()];
+    final model = ItemModel(
+        name: "null",
+        company: "null",
+        rate: "null",
+        tag: "null",
+        partNo: "null");
+    final list = [
+      "#",
+      ...model.toMap().keys,
+    ];
     if (isLoggedIn) {
       list.add("Edit");
     }
