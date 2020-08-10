@@ -15,7 +15,8 @@ class ItemViewModel extends BaseViewModel {
   final DialogService _dialogService;
   final NavigationService _navigationService;
   final SnackbarService _snackbarService;
-  List<ItemModel> _items;
+  List<ItemModel> _items = [];
+  String _searchString = "";
   ItemViewModel(this._firestoreService, this._navigationService,
       this._authenticationService, this._snackbarService, this._dialogService) {
     _firestoreService.items.listen(_onItemsAdded);
@@ -24,7 +25,10 @@ class ItemViewModel extends BaseViewModel {
     });
   }
   bool get isLoggedIn => _authenticationService.isLoggedin;
-  List<ItemModel> get items => _items;
+  List<ItemModel> get items => _items
+      .where((element) =>
+          element.name.toLowerCase().startsWith(_searchString.toLowerCase()))
+      .toList();
 
   void _onItemsAdded(List<ItemModel> items) {
     _items = items;
@@ -166,5 +170,10 @@ class ItemViewModel extends BaseViewModel {
 
   Future deleteItem(ItemModel model) async {
     await _firestoreService.deleteItem(model.id);
+  }
+
+  void onSearchStringChanged(String value) {
+    _searchString = value;
+    notifyListeners();
   }
 }
